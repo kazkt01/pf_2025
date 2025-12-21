@@ -5,6 +5,7 @@ import { Providers } from '@/components/providers'
 import { TabMenu } from '@/components/layout/TabMenu'
 import { Background } from '@/components/scene/Background'
 import { Navigation } from '@/components/layout/Navigation'
+import { Overlay } from '@/components/ui/Overlay'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
@@ -44,6 +45,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} antialiased`} suppressHydrationWarning>
         <Providers>
           <Background />
+          <Overlay />
           <TabMenu />
           <Navigation />
           <main className="relative z-10 min-h-screen">

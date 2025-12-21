@@ -5,8 +5,7 @@ import gsap from 'gsap'
 
 export function Hero() {
   // Refs for animation
-  const titleLine1Ref = useRef<HTMLHeadingElement>(null)
-  const titleLine2Ref = useRef<HTMLHeadingElement>(null)
+  // Refs for animation
   const subtitleRef = useRef<HTMLDivElement>(null)
   const accentRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -14,7 +13,8 @@ export function Hero() {
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
     
-    gsap.set([titleLine1Ref.current, titleLine2Ref.current, subtitleRef.current, accentRef.current, scrollRef.current], { opacity: 0, y: 30 })
+    gsap.set(".char", { y: 100, opacity: 0 })
+    gsap.set([subtitleRef.current, accentRef.current, scrollRef.current], { opacity: 0, y: 30 })
 
     tl.to(accentRef.current, {
         opacity: 1,
@@ -22,12 +22,12 @@ export function Hero() {
         duration: 2,
         ease: 'power2.out'
     })
-    .to([titleLine1Ref.current, titleLine2Ref.current], {
-        opacity: 1,
+    .to(".char", {
         y: 0,
-        duration: 1.8,
-        stagger: 0.3,
-        ease: 'power3.out'
+        opacity: 1,
+        stagger: 0.05,
+        duration: 1.5,
+        ease: "power4.out"
     }, "-=1.5")
     .to(subtitleRef.current, {
         opacity: 1,
@@ -43,6 +43,16 @@ export function Hero() {
 
   }, [])
 
+  const renderSplitText = (text: string, isItalic: boolean = false) => (
+    <div className={`overflow-hidden flex py-2 pr-4 pl-2 -my-2 -mr-4 -ml-2 ${isItalic ? 'italic' : ''}`}>
+        {text.split('').map((char, i) => (
+            <span key={i} className="char inline-block translate-y-[100px] opacity-0">
+                {char === ' ' ? '\u00A0' : char}
+            </span>
+        ))}
+    </div>
+  )
+
   return (
     <div className="min-h-screen w-full flex flex-col justify-center items-center relative overflow-hidden px-6 pb-40">
       
@@ -55,21 +65,21 @@ export function Hero() {
         </div>
 
         {/* Main Title - Serif & Elegant */}
-        <h1 className="flex flex-col items-center leading-[0.9] text-foreground">
-            <span 
-                ref={titleLine1Ref}
-                className="text-[13vw] md:text-[8rem] font-medium tracking-tight opacity-0 italic"
+        <h1 className="flex flex-col items-center leading-[0.9] text-foreground"
+            style={{ textShadow: '0 2px 20px rgba(255, 255, 255, 0.8)' }}
+        >
+            <div 
+                className="text-[13vw] md:text-[8rem] font-medium tracking-tight"
                 style={{ fontFamily: 'var(--font-playfair)' }}
             >
-                Kazuki
-            </span>
-            <span 
-                ref={titleLine2Ref}
-                className="text-[13vw] md:text-[8rem] font-normal tracking-tight opacity-0"
+                {renderSplitText("Kazuki", true)}
+            </div>
+            <div 
+                className="text-[13vw] md:text-[8rem] font-normal tracking-tight"
                 style={{ fontFamily: 'var(--font-playfair)' }}
             >
-                Tachibana
-            </span>
+                 {renderSplitText("Tachibana")}
+            </div>
         </h1>
 
         {/* Subtitle - Clean Sans */}
