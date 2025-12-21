@@ -44,7 +44,7 @@ export function Hero() {
   }, [])
 
   return (
-    <div className="min-h-screen w-full flex flex-col justify-center items-center relative overflow-hidden px-6">
+    <div className="min-h-screen w-full flex flex-col justify-center items-center relative overflow-hidden px-6 pb-40">
       
       {/* Centered Composition */}
       <div className="relative z-10 text-center flex flex-col items-center">

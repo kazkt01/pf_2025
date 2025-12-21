@@ -24,7 +24,7 @@ export default function Works() {
   }, [])
 
   return (
-    <div ref={containerRef} className="min-h-screen w-full flex flex-col justify-center items-center px-6 relative z-10">
+    <div ref={containerRef} className="min-h-screen w-full flex flex-col justify-center items-center px-6 relative z-10 pb-40">
       
       <h1 className="text-4xl md:text-6xl font-normal text-foreground mb-16 opacity-0 animate-in text-center"
           style={{ fontFamily: 'var(--font-playfair)' }}>

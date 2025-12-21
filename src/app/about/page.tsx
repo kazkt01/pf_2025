@@ -17,7 +17,7 @@ export default function About() {
   }, [])
 
   return (
-    <div ref={containerRef} className="min-h-screen w-full flex flex-col justify-center items-center px-6 relative z-10">
+    <div ref={containerRef} className="min-h-screen w-full flex flex-col justify-center items-center px-6 relative z-10 pb-40">
       
       {/* Accent */}
       <div className="w-2 h-2 rounded-full bg-[#C84C4C] opacity-0 animate-in mb-8" />
