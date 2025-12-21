@@ -6,6 +6,8 @@ import { useGLTF, Clone } from '@react-three/drei'
 /**
  * 草原の3Dモデルを表示するコンポーネント
  */
+import { SCENE_CONFIG } from '@/config/scene'
+
 export function Grass() {
   // 3Dモデル（glbファイル）をロードします
   const { scene } = useGLTF('/grass2_opt.glb')
@@ -13,6 +15,7 @@ export function Grass() {
   // シェーダーのuniformsを管理するためのRef
   const uniformsRef = useRef<{ uTime: { value: number } }>({ uTime: { value: 0 } })
 
+  // useMemo to ensure filtering logic runs before cloning
   useMemo(() => {
     // モデル内の全てのマテリアルに風のアニメーションを注入
     scene.traverse((child) => {
@@ -26,23 +29,11 @@ export function Grass() {
           
           // 1. ブラックリストによる除外（大文字小文字無視）
           // 注意: "grass" や "clump" (単体) はメインの草に含まれるため除外しない
-          const ignoreNames = [
-            // 'wasteland', 'winter', 'weed', 'clover', 'flower', 
-            // 'medium', 'small', 'big', 'tiny', 'branches', 'leaves', 'leave',
-            // 'nettle', 'wild', 'gravel', 'clump.', // clump.001などを除外
-            // 'dandelion', 'daisies', 'dirt', 'plane', 'stem', 
-            'dry', 
-            'type', 
-            'snow', 
-            'dead', 
-            // 'duo',
-            // 'an', 
-            'b01'
-          ]
+          const ignoreNames = SCENE_CONFIG.grass.debrisBlacklist
           const isBlacklisted = ignoreNames.some(n => name.includes(n))
 
           // 2. 座標による除外 (ゴミパーツは Z=39 付近にある)
-          const isDistantZ = Math.abs(mesh.position.z) > 20
+          const isDistantZ = Math.abs(mesh.position.z) > SCENE_CONFIG.grass.zCutoff
 
           // いずれかに該当すれば非表示
           if (isBlacklisted || isDistantZ) {
@@ -99,20 +90,12 @@ export function Grass() {
   
   return (
     // ユーザー様が調整された現在の位置とスケール
-    <group position={[7, -40,-50]} scale={20} rotation={[0, 0, 0]}>
+    <group position={[-3, -42,-50]} scale={20} rotation={[0, 0, 0]}>
       {/* 
         メインの草原モデルを配置 
         ハゲている部分を完全に埋めるため、合計7つのモデルを重ねて配置します
       */}
-      {[
-        { r: [0, 0, 0], p: [0, 0, 0] },          // オリジナル（中心）
-        // { r: [0, 1.2, 0], p: [0.3, 0, 0.2] },     // 1
-        { r: [0, 2.4, 0], p: [-0.2, 0, -0.1] },   // 2
-        { r: [0, 3.6, 0], p: [0.2, 0, -0.2] },    // 3
-        { r: [0, 4.8, 0], p: [-0.3, 0, 0.2] },    // 4
-        { r: [0, 0.6, 0], p: [0.1, 0, 0.3] },     // 5
-        { r: [0, 5.4, 0], p: [-0.1, 0, -0.3] },   // 6
-      ].map((props, i) => (
+      {SCENE_CONFIG.grass.instances.map((props, i) => (
         <Clone
           key={i}
           object={scene}

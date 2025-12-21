@@ -5,10 +5,10 @@ import { Environment, Sparkles } from '@react-three/drei'
 import { Suspense } from 'react'
 import { Grass } from './Grass'
 import { CameraController } from './CameraController'
+import { SCENE_CONFIG } from '@/config/scene'
 
 export function Scene() {
-  const fogColor = '#d6dbe0'
-  const fogColorDarker = '#d6dbe0' // 背景色と同じにしてシルエットを消す
+  const fogColor = SCENE_CONFIG.fog.color
 
   return (
     <div className="fixed inset-0 -z-10" style={{ backgroundColor: fogColor }}>
@@ -19,7 +19,7 @@ export function Scene() {
            args: [色, 初期濃度] 
            右側の数値(0.025)を変更すると初期の霧の濃さが変わります
         */}
-        <fogExp2 attach="fog" args={[fogColorDarker, 0.002]} />
+        <fogExp2 attach="fog" args={[fogColor, SCENE_CONFIG.fog.density['/']]} />
         
         <Suspense fallback={null}>
           <group position={[0, 0, 0]}>
