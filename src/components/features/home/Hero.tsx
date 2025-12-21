@@ -54,7 +54,7 @@ export function Hero() {
   )
 
   return (
-    <div className="min-h-screen w-full flex flex-col justify-center items-center relative overflow-hidden px-6 pb-40">
+    <div className="min-h-screen w-full flex flex-col justify-center items-center relative overflow-hidden px-6 pb-24 md:pb-40">
       
       {/* Centered Composition */}
       <div className="relative z-10 text-center flex flex-col items-center">
@@ -69,14 +69,20 @@ export function Hero() {
             style={{ textShadow: '0 2px 20px rgba(255, 255, 255, 0.8)' }}
         >
             <div 
-                className="text-[13vw] md:text-[8rem] font-medium tracking-tight"
-                style={{ fontFamily: 'var(--font-playfair)' }}
+                className="font-medium tracking-tight"
+                style={{ 
+                    fontFamily: 'var(--font-playfair)',
+                    fontSize: 'clamp(3.5rem, 13vw, 9rem)'
+                }}
             >
                 {renderSplitText("Kazuki", true)}
             </div>
             <div 
-                className="text-[13vw] md:text-[8rem] font-normal tracking-tight"
-                style={{ fontFamily: 'var(--font-playfair)' }}
+                className="font-normal tracking-tight"
+                style={{ 
+                    fontFamily: 'var(--font-playfair)',
+                    fontSize: 'clamp(3.5rem, 13vw, 9rem)'
+                }}
             >
                  {renderSplitText("Tachibana")}
             </div>

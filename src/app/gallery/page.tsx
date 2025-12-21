@@ -27,7 +27,7 @@ export default function Gallery() {
   }, [])
 
   return (
-    <div ref={containerRef} className="min-h-screen w-full flex flex-col items-center px-6 py-32 relative z-10">
+    <div ref={containerRef} className="min-h-screen w-full flex flex-col items-center px-6 py-20 md:py-32 relative z-10">
       
       <h1 className="text-4xl md:text-6xl font-normal italic text-foreground mb-20 opacity-0 animate-in text-center"
           style={{ fontFamily: 'var(--font-playfair)' }}>

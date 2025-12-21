@@ -5,14 +5,19 @@ import gsap from 'gsap'
 import { SCENE_CONFIG } from '@/config/scene'
 
 export function CameraController() {
-  const { camera, scene } = useThree()
+  const { camera, scene, size } = useThree()
   const pathname = usePathname()
 
   useEffect(() => {
     // パスに基づいて設定値を取得（見つからない場合はトップページの値を使用）
     const pathKey = pathname as keyof typeof SCENE_CONFIG.fog.density
-    const targetZ = SCENE_CONFIG.camera.zPositions[pathKey] ?? SCENE_CONFIG.camera.zPositions['/']
+    let targetZ = SCENE_CONFIG.camera.zPositions[pathKey] ?? SCENE_CONFIG.camera.zPositions['/']
     const targetDensity = SCENE_CONFIG.fog.density[pathKey] ?? SCENE_CONFIG.fog.density['/']
+
+    // モバイル調整: 画面幅が小さい場合、カメラを少し引く（Z値を増やす）
+    if (size.width < 768) {
+        targetZ += 3 // 3ユニット後ろに下がる
+    }
 
     gsap.to(camera.position, {
       z: targetZ,
@@ -30,7 +35,7 @@ export function CameraController() {
             ease: SCENE_CONFIG.camera.ease
         })
     }
-  }, [pathname, camera, scene])
+  }, [pathname, camera, scene, size.width])
 
   return null
 }

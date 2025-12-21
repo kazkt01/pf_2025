@@ -16,7 +16,7 @@ export function TabMenu() {
   const [hoveredPath, setHoveredPath] = React.useState<string | null>(null)
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] md:w-auto max-w-md">
+    <nav className="fixed bottom-8 md:bottom-auto md:top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] md:w-auto max-w-md">
       <div className="flex items-center justify-between md:justify-center p-1.5 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg overflow-x-auto scrollbar-hide ring-1 ring-white/5">
         {navItems.map((item) => {
           const isActive = pathname === item.href
