@@ -8,7 +8,7 @@ import { CameraController } from './CameraController'
 
 export function Scene() {
   const fogColor = '#d6dbe0'
-  const fogColorDarker = '#b0b8c0' // 霧用のより濃い色（視認性向上）
+  const fogColorDarker = '#d6dbe0' // 背景色と同じにしてシルエットを消す
 
   return (
     <div className="fixed inset-0 -z-10" style={{ backgroundColor: fogColor }}>
@@ -19,7 +19,7 @@ export function Scene() {
            args: [色, 初期濃度] 
            右側の数値(0.025)を変更すると初期の霧の濃さが変わります
         */}
-        <fogExp2 attach="fog" args={[fogColorDarker, 0.012]} />
+        <fogExp2 attach="fog" args={[fogColorDarker, 0.002]} />
         
         <Suspense fallback={null}>
           <group position={[0, 0, 0]}>

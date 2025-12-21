@@ -15,24 +15,24 @@ export function CameraController() {
     // targetDensity: 霧の濃さ（値が大きいほど濃くなります）
     switch (pathname) {
       case '/about':
-        targetZ = 0
-        targetDensity = 0.04 // Aboutページの霧の濃さ
+        targetZ = -4
+        targetDensity = 0.005 // Aboutページの霧の濃さ
         break
       case '/works':
-        targetZ = -8
-        targetDensity = 0.05 // Worksページの霧の濃さ
+        targetZ = -16
+        targetDensity = 0.006 // Worksページの霧の濃さ
         break
       case '/gallery':
-        targetZ = -12
-        targetDensity = 0.06 // Galleryページの霧の濃さ
+        targetZ = -28
+        targetDensity = 0.012 // Galleryページの霧の濃さ
         break
       case '/contact':
-        targetZ = -16
-        targetDensity = 0.075 // Contactページの霧の濃さ
+        targetZ = -40
+        targetDensity = 0.600 // Contactページの霧の濃さ
         break
       default:
         targetZ = 8
-        targetDensity = 0.025 // TOPページの霧の濃さ
+        targetDensity = 0.004 // TOPページの霧の濃さ
     }
 
     gsap.to(camera.position, {
@@ -40,6 +40,9 @@ export function CameraController() {
       duration: 2.5,
       ease: 'power3.inOut'
     })
+    
+    // カメラの回転をリセット（まっすぐ前を見る）
+    camera.rotation.set(0, 0, 0)
 
     if (scene.fog && 'density' in scene.fog) {
         gsap.to(scene.fog, {
