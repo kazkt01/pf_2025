@@ -11,7 +11,13 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  // Disable source maps for production to save memory
+  productionBrowserSourceMaps: false,
+
   experimental: {
+    // Limit concurrency to reduce memory usage on Vercel
+    workerThreads: false,
+    cpus: 1,
     optimizePackageImports: [
       '@react-three/drei', 
       '@heroui/react', 
