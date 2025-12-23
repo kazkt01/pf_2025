@@ -13,6 +13,8 @@ const nextConfig = {
   },
   // Disable source maps for production to save memory
   productionBrowserSourceMaps: false,
+  // Disable SWC minification (use Terser or skip) to reduce memory usage
+  swcMinify: false,
   experimental: {
     workerThreads: false,
     cpus: 1,
