@@ -16,6 +16,13 @@ const nextConfig = {
   experimental: {
     workerThreads: false,
     cpus: 1,
+    // Optimize analyzing heavy libraries to save memory
+    optimizePackageImports: [
+      '@react-three/drei', 
+      '@heroui/react', 
+      'framer-motion', 
+      'three'
+    ],
   },
 };
 
