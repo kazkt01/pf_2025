@@ -9,13 +9,7 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: false,
 
-  webpack: (config, { dev }) => {
-    // Disable minification to prevent OOM
-    if (!dev) {
-      config.optimization.minimize = false;
-    }
-    return config;
-  },
+
 
   experimental: {
     // Limit concurrency to reduce memory usage on Vercel
