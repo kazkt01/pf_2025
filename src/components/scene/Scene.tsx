@@ -37,7 +37,7 @@ export function Scene() {
         
         <Suspense fallback={null}>
           <group position={[0, 0, 0]}>
-            {/* <Grass /> */}
+            <Grass />
           </group>
 
 
