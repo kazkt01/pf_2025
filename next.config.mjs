@@ -11,8 +11,15 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  // Disable source maps for production to save memory
   productionBrowserSourceMaps: false,
+
+  webpack: (config, { dev }) => {
+    // Disable minification to prevent OOM
+    if (!dev) {
+      config.optimization.minimize = false;
+    }
+    return config;
+  },
 
   experimental: {
     // Limit concurrency to reduce memory usage on Vercel
