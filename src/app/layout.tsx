@@ -44,7 +44,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} antialiased`} suppressHydrationWarning>
         <Providers>
-          <Background />
+          {/* <Background /> */}
           <Overlay />
           <TabMenu />
           <Navigation />
