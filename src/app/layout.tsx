@@ -3,8 +3,12 @@ import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/providers'
 import { TabMenu } from '@/components/layout/TabMenu'
-import { Background } from '@/components/scene/Background'
+import dynamic from 'next/dynamic'
 import { Navigation } from '@/components/layout/Navigation'
+
+const Background = dynamic(() => import('@/components/scene/Background').then(mod => mod.Background), { 
+  ssr: false 
+})
 import { Overlay } from '@/components/ui/Overlay'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
