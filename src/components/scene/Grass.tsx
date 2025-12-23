@@ -11,7 +11,7 @@ import { SCENE_CONFIG } from '@/config/scene'
 
 export function Grass() {
   // 3Dモデル（glbファイル）をロードします
-  const { scene } = useGLTF('/grass2_opt.glb')
+  const { scene } = useGLTF('/grass2_draco.glb')
   
   // シェーダーのuniformsを管理するためのRef
   const uniformsRef = useRef<{ uTime: { value: number } }>({ uTime: { value: 0 } })
@@ -108,4 +108,4 @@ export function Grass() {
 }
 
 // パフォーマンス向上のため、あらかじめモデルをプリロードしておきます
-useGLTF.preload('/grass2_opt.glb')
+useGLTF.preload('/grass2_draco.glb')
