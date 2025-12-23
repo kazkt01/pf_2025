@@ -18,12 +18,6 @@ const nextConfig = {
     // Limit concurrency to reduce memory usage on Vercel
     workerThreads: false,
     cpus: 1,
-    optimizePackageImports: [
-      '@react-three/drei', 
-      '@heroui/react', 
-      'framer-motion', 
-      'three'
-    ],
   },
 };
 
