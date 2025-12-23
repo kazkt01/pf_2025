@@ -23,9 +23,9 @@
   "editor.smoothScrolling": false,
   "workbench.list.smoothScrolling": false,
   "editor.cursorBlinking": "solid",
-  "editor.renderIndentGuides": false,
   "editor.codeLens": false,
   "git.autorefresh": false,
   "extensions.ignoreRecommendations": true,
-  "explorer.openEditors.visible": 1
+  "explorer.openEditors.visible": 1,
+  "editor.guides.indentation": false
 }

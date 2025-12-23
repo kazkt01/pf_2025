@@ -2,11 +2,12 @@ import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Mesh, MeshStandardMaterial } from 'three'
 import { useGLTF, Clone } from '@react-three/drei'
+import { SCENE_CONFIG } from '@/config/scene'
 
 /**
  * 草原の3Dモデルを表示するコンポーネント
+ * パフォーマンス復旧: InstancedMesh化によるオーバーヘッドを避けるため、Clone実装に戻しました。
  */
-import { SCENE_CONFIG } from '@/config/scene'
 
 export function Grass() {
   // 3Dモデル（glbファイル）をロードします
@@ -93,7 +94,6 @@ export function Grass() {
     <group position={[-3, -42,-50]} scale={20} rotation={[0, 0, 0]}>
       {/* 
         メインの草原モデルを配置 
-        ハゲている部分を完全に埋めるため、合計7つのモデルを重ねて配置します
       */}
       {SCENE_CONFIG.grass.instances.map((props, i) => (
         <Clone

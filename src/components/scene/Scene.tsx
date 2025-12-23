@@ -1,18 +1,32 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { Environment, Sparkles } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Environment, Sparkles, PerformanceMonitor } from '@react-three/drei'
+import { Suspense, useState } from 'react'
 import { Grass } from './Grass'
 import { CameraController } from './CameraController'
 import { SCENE_CONFIG } from '@/config/scene'
 
 export function Scene() {
   const fogColor = SCENE_CONFIG.fog.color
+  const [dpr, setDpr] = useState(1.25)
 
   return (
     <div className="fixed inset-0 -z-10" style={{ backgroundColor: fogColor }}>
-      <Canvas camera={{ position: [0, 1, 8], fov: 45 }} dpr={[1, 1.5]}>
+      <Canvas 
+        camera={{ position: [0, 1, 8], fov: 45 }} 
+        dpr={dpr} 
+        shadows={false}
+        gl={{ powerPreference: "high-performance" }}
+      >
+        {/* パフォーマンス監視: FPSが低下したら解像度を下げ、安定したら戻す */}
+        <PerformanceMonitor 
+          onDecline={() => setDpr(0.8)} 
+          onIncline={() => setDpr(1.25)} 
+          flipflops={3}
+          onFallback={() => setDpr(0.8)}
+        />
+
         <CameraController />
         {/* 
            fogExp2: 指数関数的な霧の効果

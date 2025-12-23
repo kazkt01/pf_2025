@@ -15,11 +15,6 @@ const nextConfig: NextConfig = {
   },
   // Disable source maps for production to save memory
   productionBrowserSourceMaps: false,
-  experimental: {
-    // Limit memory usage by restricting worker threads
-    workerThreads: false,
-    cpus: 1,
-  },
 };
 
 export default nextConfig;
