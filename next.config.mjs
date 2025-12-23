@@ -13,11 +13,14 @@ const nextConfig = {
   },
   // Disable source maps for production to save memory
   productionBrowserSourceMaps: false,
+  // Disable font optimization to prevent network timeouts/OOM
+  optimizeFonts: false,
   
   webpack: (config, { dev, isServer }) => {
     // Disable minification during build to prevent OOM
     if (!dev) {
       config.optimization.minimize = false;
+      config.devtool = false;
     }
     return config;
   },
